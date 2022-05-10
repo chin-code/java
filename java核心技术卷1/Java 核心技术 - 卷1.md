@@ -96,6 +96,49 @@ Java 解释器可以在任何移植了解释器的机器上直接执行 Java 字
 # 第二章 Java 程序设计环境
 
 <hr />
+## 2.1 安装 Java 开发工具包
+
+**Java 术语**
+
+| 术语名                                      | 缩写 | 解释                                                         |
+| ------------------------------------------- | ---- | ------------------------------------------------------------ |
+| Java Development Kit（Java 开发工具包）     | JDK  | 编写 Java 程序的程序员使用的软件                             |
+| Java Runtime Environment（Java 运行时环境） | JRE  | 运行 Java 程序的用户使用的软件                               |
+| Server JRE（服务器 JRE）                    | ——   | 在服务器上运行 Java 程序的软件                               |
+| Standard Edition（标准版）                  | SE   | 用于桌面或简单服务器应用的 Java 平台                         |
+| Enterprise Edition（企业版）                | EE   | 用于复杂服务器应用的 Java 平台                               |
+| Micro Edition（微型版）                     | ME   | 用于小型设备的 Java 平台                                     |
+| Java FX                                     | ——   | 用于图形化用户界面的一个备选工具包，在 Java 11 之前的某些 Java SE 发布版本中提供 |
+| OpenJDK                                     | ——   | Java SE 的一个免费开源实现                                   |
+| Java 2                                      | J2   | 一个过时的术语，用于描述 1998~2006 年之间的 Java 版本        |
+| Software Development Kit                    | SDK  | 一个过时的术语，用于描述 1998~2006 年之间的 JDK              |
+| Update                                      | u    | Oracle 公司的术语，表示 Java 8 之前的 bug 修正版本           |
+| NetBeans                                    | ——   | Oracle 公司的集成开发环境                                    |
+
+[下载地址](http://www.oracle.com/technetwork/java/javase/downloads)
+
+## 2.2 使用命令行工具
+
+**从命令行编译并运行 Java 程序**
+
+```
+1. 打开一个终端窗口。
+2. 创建 java 文件，编写 java 程序。
+3. 键入下面命令
+	javac welcome.java //编译源文件，生成 welcome.class 文件
+	java welcome //执行 class 文件，看到程序运行结果
+```
+
+## 2.3 使用集成开发环境
+
+对于大多数日常工作来说，还是应当使用集成开发环境。这些环境非常强大，非常方便。
+
+我们可以免费得到一些很棒的开发环境，如 Eclipse，IntellJ IDEA 和 NetBeans。
+
+## 2.4 JShell
+
+Java 9 引入了另一种使用 Java 的方法。
+
 # 第三章 Java 的基本程序设计结构
 
 <hr />
@@ -132,7 +175,6 @@ Java 区分大小写。
 # 第四章 对象与类
 
 <hr />
-
 由于 Java 是面向对象的，所以你必须熟悉 OOP 才能够很好的使用 Java。
 
 **类** 是构造对象的模板或蓝图。
