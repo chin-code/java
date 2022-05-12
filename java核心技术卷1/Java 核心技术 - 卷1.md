@@ -228,6 +228,10 @@ int[] a = {2,3,5,7}; //简写形式
 # 第四章 对象与类
 
 <hr />
+## 4.1 面向对象程序设计概述
+
+对于一些规模较小的问题，将其分解为过程的开发方式比较理想。面向对象更适合解决规模较大的问题。
+
 由于 Java 是面向对象的，所以你必须熟悉 OOP 才能够很好的使用 Java。
 
 **类** 是构造对象的模板或蓝图。
@@ -259,3 +263,159 @@ int[] a = {2,3,5,7}; //简写形式
 聚合，即 **has-a** 关系，类 A 的对象包含类 B 的对象。
 
 所以的 Java 对象都存储在堆中。
+
+## 4.2 使用预定义类
+
+```java
+package Date;
+
+import java.time.*;
+
+public class CalendarTest {
+    public static void main(String[] args) {
+        LocalDate date = LocalDate.now();
+
+        int month = date.getMonthValue();
+        int today = date.getDayOfMonth();
+
+        date = date.minusDays(today -1);
+        System.out.println(date);
+        DayOfWeek weekday = date.getDayOfWeek();
+        int value = weekday.getValue(); //1 = Monday,....7 = sunday
+        System.out.println(value);
+
+        System.out.println("Mon Tue Wed Thu Fri Sat Sun");
+        for (int i = 1; i < value; i++) {
+            System.out.print("    ");
+        }
+
+        while(date.getMonthValue() == month)
+        {
+            System.out.printf("%3d",date.getDayOfMonth());
+            if (date.getDayOfMonth() == today)
+                System.out.print("*");
+            else
+                System.out.print(" ");
+            date = date.plusDays(1);
+            if (date.getDayOfWeek().getValue() == 1) {
+                System.out.println();
+            }
+
+        }
+
+        if (date.getDayOfWeek().getValue() != 1)
+            System.out.println();
+    }
+}
+
+```
+
+
+
+## 4.3 用户自定义类
+
+```java
+package custom;
+
+import java.time.LocalDate;
+
+public class Employee {
+    private String name;
+    private double salary;
+    private LocalDate hireDay;
+
+    //constructor
+    public Employee(String n,double s,int year,int month,int day)
+    {
+        name = n;
+        salary = s;
+        hireDay = LocalDate.of(year,month,day);
+    }
+    //a method
+    public String getName()
+    {
+        return name;
+    }
+    //more methods...
+}
+
+```
+
+**构造器：**
+
+- 构造器与类同名。
+- 每个类可以有一个以上的构造器。
+- 构造器可以有 0 个，1 个或多个参数。
+- 构造器没有返回值。
+- 构造器总是伴随着 new 操作符一起调用。
+
+在 Java 10 中，如果可以从变量的初始值推导出它们的类型，则可以用 var 关键字声明局部变量，而无须指定类型。
+
+```java
+Employee harry = new Employee("Harry Hacker",50000,1989,10,1);
+可改成
+var harry = new Employee("Harry Hacker",50000,1989,10,1);
+```
+
+可以将实例字段定义为 final。这样的实例字段必须在构造对象时初始化。
+
+## 4.4 静态字段和静态方法
+
+如果将一个字段定义为 static，则每个类只有一个这样的字段。
+
+而对于非静态的实例字段，每个对象都有自己的一个副本。
+
+## 4.5 方法参数
+
+**按值调用：** 表示方法接收的是调用者提供的值。
+
+**按引用调用：** 表示方法接收的是调用者提供的变量地址。
+
+## 4.6 对象构造
+
+Java 允许重载任何方法，而不只是构造器方法。因此，要完整地描述一个方法，需要指定方法名以及参数类型。这叫做方法的 **签名**。
+
+**默认字段的初始化**
+
+如果在构造器中没有显式地为字段设置初值，那么就会被自动地赋为默认值：数值为 0、布尔值为 false，对象引用为 null。
+
+## 4.7 包
+
+Java 允许使用包（package）将类组织在一个集合中。借助包可以方便地组织自己的代码，并将自己的代码与别人提供的代码库分开管理。
+
+使用包的主要原因是确保类名的唯一性。
+
+**静态导入**
+
+```java
+import static java.lang.System.*; //导入 System 类的静态方法和静态字段
+import static java.lang.System.out; //导入特定的静态方法或静态字段
+```
+
+## 4.8 JAR 文件
+
+## 4.9 文档注释
+
+JDK 包含一个很有用的工具，叫做 Javadoc，它可以由源文件生成一个 HTML 文档。
+
+## 4.10 类设计技巧
+
+应用这些技巧可以使你设计的类更能得到专业 OOP 圈子的认可。
+
+1. 一定要保证数据私有。
+
+这是最重要的，绝对不要破坏封装性。
+
+2. 一定要对数据进行初始化。
+
+Java 不会为你初始化局部变量，但是会对对象的实例字段进行初始化。最好不要依赖于系统的默认值，而是应该 **显式** 地初始化所有的数据。
+
+3. 不要在类中使用过多的基本类型。
+
+要用其他的类替换使用多个相关的基本类型，这样会使类更容易理解，也更易于修改。
+
+4. 不是所有的字段都需要单独的字段访问器和字段更改器。
+5. 分解有过多职责的类。
+6. 类名与方法名要能够体现它们的职责。
+7. 优先使用不可变的类。
+
